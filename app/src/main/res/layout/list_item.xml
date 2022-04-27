@@ -4,25 +4,24 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
     <TextView
-        android:id="@+id/name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/name"
         android:paddingBottom="2dip"
         android:paddingTop="6dip"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
         android:textStyle="bold"/>
     <TextView
-        android:id="@+id/email"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/email"
         android:paddingBottom="2dip"
-        android:textColor="@color/colorAccent"/>
+        android:text="@color/colorAccent"/>
     <TextView
-        android:id="@+id/mobile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/mobile"
         android:textColor="#5d5d5d"
         android:textStyle="bold"/>
-
 </LinearLayout>

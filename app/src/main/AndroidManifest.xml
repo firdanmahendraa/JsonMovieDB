@@ -4,15 +4,14 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
-
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.JsonMovieDb">
+        android:theme="@style/Theme.JsonMovieDB">
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -22,10 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".JsonParseActivity"/>
-        <activity android:name=".JsonAPIActivity"/>
-        <activity android:name=".MovieDBActivity"/>
+        <activity android:name=".JsonParseActivity"></activity>
+        <activity android:name=".JsonAPIActivity"></activity>
+        <activity android:name=".MovieDBActivity"></activity>
     </application>
 
 </manifest>

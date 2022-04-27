@@ -11,8 +11,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.core.Tag;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,100 +20,68 @@ import java.util.HashMap;
 
 public class JsonAPIActivity extends AppCompatActivity {
     private String TAG = MainActivity.class.getSimpleName();
-
     private ProgressDialog pDialog;
     private ListView lv;
-
-    // URL to get contacts JSON
-    private static  String url = "https://api.androidhive.info/contacts/";
-
+    private static String url = "https://api.androidhive.info/contacts";
     ArrayList<HashMap<String, String>> contactList;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.json_api);
-
         contactList = new ArrayList<>();
-
-        lv = (ListView) findViewById(R.id.user_list);
-
+        lv = (ListView) findViewById(R.id.listview);
         new GetContacts().execute();
     }
-
-    /**
-     * Async task class to get json by making HTTP call
-     */
-    private class GetContacts extends AsyncTask<Void, Void, Void> {
-
+    private class GetContacts extends AsyncTask<Void, Void, Void>{
         @Override
         protected void onPreExecute(){
             super.onPreExecute();
-            //showing progress dialog
             pDialog = new ProgressDialog(JsonAPIActivity.this);
-            pDialog.setMessage("Please wait...");
+            pDialog.setMessage("Please Wait...");
             pDialog.setCancelable(false);
             pDialog.show();
-
         }
-
         @Override
-        protected Void doInBackground(Void... voids) {
-            HttpHandler sh = new HttpHandler();
-
-            //Making a request to url and getting response
+        protected Void doInBackground(Void... arg0){
+            HttpHandle sh = new HttpHandle();
             String jsonStr = sh.makeServiceCall(url);
-
-            Log.e(TAG, "Response from url: " + jsonStr);
-
-            if (jsonStr != null) {
+            Log.e(TAG, "Response from url : " + jsonStr);
+            if (jsonStr != null){
                 try {
                     JSONObject jsonObj = new JSONObject(jsonStr);
-
-                    //Getting JSON Array node
                     JSONArray contacts = jsonObj.getJSONArray("contacts");
-
-                    //lopping through All Contacts
-                    for (int i = 0; i < contacts.length(); i++) {
+                    for (int i = 0; i < contacts.length(); i++){
                         JSONObject c = contacts.getJSONObject(i);
-
                         String id = c.getString("id");
                         String name = c.getString("name");
                         String email = c.getString("email");
-                        String address = c.getString("addres");
+                        String address = c.getString("address");
                         String gender = c.getString("gender");
 
-                        //phone node is JSON Object
                         JSONObject phone = c.getJSONObject("phone");
                         String mobile = phone.getString("mobile");
                         String home = phone.getString("home");
                         String office = phone.getString("office");
 
-                        //tmp hash map for single contact
                         HashMap<String, String> contact = new HashMap<>();
-
-                        //adding each child node to HashMap key => value
+                        contact.put("id", id);
                         contact.put("id", id);
                         contact.put("name", name);
                         contact.put("email", email);
                         contact.put("mobile", mobile);
 
-                        //adding contact to contact list
                         contactList.add(contact);
-
-
                     }
-                } catch (final JSONException e) {
+                } catch (final JSONException e){
                     Log.e(TAG, "Json parsing error: " + e.getMessage());
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             Toast.makeText(getApplicationContext(),
                                     "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG)
-                                    .show();
+                                    Toast.LENGTH_LONG).show();
                         }
-
                     });
                 }
             } else {
@@ -124,30 +90,23 @@ public class JsonAPIActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Toast.makeText(getApplicationContext(),
-                                "Json parsing error: " ,
-                                Toast.LENGTH_LONG)
-                                .show();
+                                "Couldn't get JSON from server: ",
+                                Toast.LENGTH_LONG).show();
                     }
                 });
-
-                return null;
             }
             return null;
         }
-
-    @Override
-    protected void onPostExecute(Void result) {
-        super.onPostExecute(result);
-        if (pDialog.isShowing())
-            pDialog.dismiss();
-
-        ListAdapter adapter = new SimpleAdapter(
-                JsonAPIActivity.this, contactList,
-                R.layout.list_item, new String[]{"name", "email", "mobile"},
-                new int[]{R.id.name, R.id.email, R.id.mobile});
-        lv.setAdapter(adapter);
+        @Override
+        protected void onPostExecute(Void result){
+            super.onPostExecute(result);
+            if (pDialog.isShowing())pDialog.dismiss();
+            ListAdapter adapter = new SimpleAdapter(
+                    JsonAPIActivity.this, contactList,
+                    R.layout.list_item, new String[]{"name", "email", "mobile"}, new int[]{R.id.name, R.id.email,
+                    R.id.mobile}
+            );
+            lv.setAdapter(adapter);
+        }
     }
 }
-}
-
-
