@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Smt4/Workshop Progressive Web Apps/Android/JsonMovieDB/app/src/main/res/drawable/ic_baseline_looks_3_24.xml" value="0.144" />
+        <entry key="..\:/Smt4/Workshop Progressive Web Apps/Android/JsonMovieDB/app/src/main/res/drawable/ic_baseline_looks_one_24.xml" value="0.144" />
+        <entry key="..\:/Smt4/Workshop Progressive Web Apps/Android/JsonMovieDB/app/src/main/res/drawable/ic_baseline_looks_two_24.xml" value="0.144" />
+        <entry key="..\:/Smt4/Workshop Progressive Web Apps/Android/JsonMovieDB/app/src/main/res/drawable/ic_launcher_background.xml" value="0.144" />
         <entry key="..\:/Smt4/Workshop Progressive Web Apps/Android/JsonMovieDB/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Smt4/Workshop Progressive Web Apps/Android/JsonMovieDB/app/src/main/res/layout/json_api.xml" value="0.1" />
         <entry key="..\:/Smt4/Workshop Progressive Web Apps/Android/JsonMovieDB/app/src/main/res/layout/json_parse.xml" value="0.1" />
