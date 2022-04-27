@@ -14,29 +14,30 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ImageView showJson = (ImageView) findViewById(R.id.json);
-        ImageView showJsonAPI = (ImageView) findViewById(R.id.json);
-        ImageView showMovieDB = (ImageView) findViewById(R.id.json);
-
+        ImageView showJsonAPI = (ImageView) findViewById(R.id.json_api);
+        ImageView showMovieDB = (ImageView) findViewById(R.id.moviedb);
         showJson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent( MainActivity.this, JsonParseActivity.class);
-                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this, JsonParseActivity.class);
+                        startActivity(intent);
             }
         });
+
         showJsonAPI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent( MainActivity.this, JsonParseActivity.class);
+                Intent intent = new Intent(MainActivity.this, JsonAPIActivity.class);
                 startActivity(intent);
             }
         });
-        showMovieDB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent( MainActivity.this, JsonParseActivity.class);
-                startActivity(intent);
-            }
-        });
+//          untuk sementara dinonaktifkan menunggu acara 20 selesai baru diaktifkan kembali.
+//        showMovieDB.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(MainActivity.this, MovieDBActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 }

@@ -2,11 +2,11 @@ package com.example.jsonmoviedb;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ListAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -17,35 +17,39 @@ import java.util.HashMap;
 
 public class JsonParseActivity extends AppCompatActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.json_parse);
         getSupportActionBar().setTitle("JSON");
         String jsonStr = getListData();
         try {
-            ArrayList<HashMap<String, String>> userlist = new ArrayList<>();
+            ArrayList<HashMap<String, String>> userList = new ArrayList<>();
             ListView lv = (ListView) findViewById(R.id.user_list);
             JSONObject jObj = new JSONObject(jsonStr);
-            JSONArray jsonArry = jObj.getJSONArray("users");
-            for (int i = 0; i < jsonArry.length(); i++){
+            JSONArray jsonArray = jObj.getJSONArray("users");
+            for (int i = 0; i < jsonArray.length(); i++) {
                 HashMap<String, String> user = new HashMap<>();
-                JSONObject obj = jsonArry.getJSONObject(i);
+                JSONObject obj = jsonArray.getJSONObject(i);
                 user.put("name", obj.getString("name"));
                 user.put("designation", obj.getString("designation"));
                 user.put("location", obj.getString("location"));
-                userlist.add(user);
+                userList.add(user);
             }
-            ListAdapter adapter = new SimpleAdapter(JsonParseActivity.this, userlist, R.layout.list_row, new String[]{"name", "designation", "location"}, new int[]{R.id.name, R.id.designation, R.id.location});
+            SimpleAdapter adapter = new SimpleAdapter(JsonParseActivity.this, userList,
+                    R.layout.list_row, new String[]{"name", "designation", "location"},
+                    new int[]{R.id.name, R.id.designation, R.id.location});
             lv.setAdapter(adapter);
-        } catch (JSONException ex){
-            Log.e("JsonParser Example", "unexpected JSON exception", ex);
+        } catch (JSONException e) {
+            Log.e("JsonParser Example", "unexpected JSON exeption", e);
         }
     }
-    private  String getListData(){
-        String jsonStr = "{\"user\" :[" +
-                "{\"name\":\"Monkey D. Luffy\",\"designation\":\"Leader\":\"location\":\"East Blue\"}" +
-                "{\"name\":\"Roronoa Zoro\",\"designation\":\"Vice Leader\":\"location\":\"East Blue\"}" +
-                "{\"name\":\"Nami\",\"designation\":\"Navigator\":\"location\":\"East Blue\"}] }";
+
+    private String getListData() {
+        String jsonStr = "{ \"users\" :[" +
+                "{\"name\":\"Monkey D Luffy\",\"designation\":\"Leader\",\"location\":\"East Blue\"}" +
+                ",{\"name\":\"Roronoa Zoro\",\"designation\":\"Vice Leader\",\"location\":\"East Blue\"}" +
+                ",{\"name\":\"Nami\",\"designation\":\"Navigator\",\"location\":\"East Blue\"}] }";
         return jsonStr;
     }
 }
